@@ -21,7 +21,7 @@ from pytfa.io import load_thermoDB,                    \
 from pytfa.optim.relaxation import relax_dgo
 
 from etfl.core import Enzyme, Ribosome, RNAPolymerase, ThermoMEModel, MEModel
-from etfl.core.mrna import mRNA
+from etfl.core.rna import mRNA
 
 from etfl.io.json import save_json_model
 
@@ -471,9 +471,7 @@ for x in nt_sequences.index:
     if np.isnan(this_kdeg_mrna):
         this_kdeg_mrna = kdeg_mrna # Average value of 5 mins
 
-    new_mrna = mRNA(x,`
-                    kdeg = this_kdeg_mrna,
-                    gene_id = the_gene.id)
+    new_mrna = mRNA(x, kdeg=this_kdeg_mrna, gene_id=the_gene.id)
     mrna_dict[x] = new_mrna
 
 #[ ribosomes and RNAP ]#

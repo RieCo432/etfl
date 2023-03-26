@@ -10,11 +10,13 @@ ME-related Enzyme subclasses and methods definition
 
 
 """
+import Bio.Alphabet
 from cobra import Metabolite
 from .macromolecule import Macromolecule
 from ..optim.variables import mRNAVariable, tRNAVariable
 from Bio.SeqUtils import molecular_weight
 from .macromolecule import Macromolecule
+from Bio.Seq import Seq
 
 from warnings import warn
 
@@ -27,7 +29,10 @@ class RNA(Macromolecule):
 
     @property
     def rna(self):
-        return self.gene.rna
+        if isinstance(self.gene.rna.alphabet, Bio.Alphabet.RNAAlphabet):
+            return self.gene.rna
+        else:
+            return Seq(self.gene.rna._data, Bio.Alphabet.RNAAlphabet())
 
     @property
     def gene(self):
